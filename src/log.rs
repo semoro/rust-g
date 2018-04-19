@@ -30,7 +30,7 @@ byond_fn! { log_close_all()! {
 } }
 
 fn format(data: &str) -> String {
-    format!("[{}] {}\n", Utc::now().format("%F %T%.3f"), data)
+    format!("[{}] {}\n", Utc::now().format("%FT%T"), data)
 }
 
 fn write(path: &str, data: String) -> Result<usize> {
