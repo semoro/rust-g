@@ -14,6 +14,15 @@ rust-g is build with [Rust] as you might have guessed from the name. Install rus
 
     cargo build --release
 
+If you are on a 64 bit machine, this will produce a 64 bit binary - BYOND can't run this.
+To avoid that, you should instead use
+
+	rustup target add i686-pc-windows-msvc
+
+followed by
+
+	cargo build --target=i686-pc-windows-msvc --release
+
 All dependencies will automatically be downloaded and compiled. rust-g should be compilable on
 both Rust stable and nightly.
 
