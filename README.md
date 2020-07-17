@@ -69,6 +69,22 @@ On Linux, the output will be `target/release/librust_g.so`.
 
 On Windows, the output will be `target/release/rust_g.dll`.
 
+If you are on a 64 bit machine, this will produce a 64 bit binary - BYOND can't run this.
+To avoid that, you should instead use
+
+```sh
+rustup target add i686-pc-windows-msvc
+```
+
+followed by
+
+```sh
+cargo build --target=i686-pc-windows-msvc --release
+```
+
+All dependencies will automatically be downloaded and compiled. rust-g should be compilable on
+both Rust stable and nightly.
+
 For more advanced configuration, a list of modules may be passed:
 
 ```sh
