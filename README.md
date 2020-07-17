@@ -3,12 +3,12 @@
 rust-g (pronounced rusty-g) is a library which offloads certain expensive or
 difficult tasks from BYOND.
 
-This library is currently used in the [tgstation] codebase, and is required for
+This library is currently used in the Paradise codebase, and is required for
 it to run. A pre-compiled DLL version can be found in the repo root, but you
 can build your own from this repo at your preference. Builds can also be found
 on the [releases page].
 
-[releases page]: https://github.com/tgstation/rust-g/releases
+[releases page]: https://github.com/ParadiseSS13/rust-g/releases
 
 ## Dependencies
 
@@ -33,7 +33,7 @@ The [Rust] compiler:
 
     ```sh
     # Clone the `rust-g` repository to a directory of your choice
-    git clone https://github.com/tgstation/rust-g.git
+    git clone https://github.com/ParadiseSS13/rust-g.git
     # in the `rust-g` directory...
     cd rust-g
     # Linux
@@ -58,7 +58,7 @@ System libraries:
 
 The [cargo] tool handles compilation, as well as automatically downloading and
 compiling all Rust dependencies. The default configuration is suitable for
-use with the [tgstation] codebase. To compile in release mode (recommended for
+use with the Paradise codebase. To compile in release mode (recommended for
 speed):
 
 ```sh
@@ -78,7 +78,6 @@ cargo build --release --features dmi,file,log,url,http
 The default features are:
 * log: Faster log output.
 * dmi: DMI manipulations which are impossible from within BYOND.
-  Used by the asset cache subsystem to improve load times.
 * git: Functions for robustly checking the current git revision.
 * http: Asynchronous HTTP(s) client supporting most standard methods.
 * sql: Asynchronous MySQL/MariaDB client library.
@@ -133,14 +132,14 @@ it is included in the `LD_LIBRARY_PATH` environment variable, or tweak the searc
 logic in `rust_g.dm`:
 
 ```sh
-$ export LD_LIBRARY_PATH=/path/to/tgstation
+$ export LD_LIBRARY_PATH=/path/to/paradise
 ```
 
 To examine what locations BYOND is searching for the shared library, use
 `strace`:
 
 ```sh
-$ strace DreamDaemon tgstation.dmb 45000 -trusted -logself 2>&1 | grep 'rust_g'
+$ strace DreamDaemon paradise.dmb 6666 -trusted -logself 2>&1 | grep 'rust_g'
 # Early in output, the file will be listed when BYOND examines every file it can see:
 open("rust_g", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_DIRECTORY|O_CLOEXEC) = -1 ENOTDIR (Not a directory)
 # BYOND will then search some common directories...
@@ -161,10 +160,6 @@ open("rust_g", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_DIRECTORY|O_CLOEXEC) = -1 ENOTD
 If you're still having problems, ask in the [Coderbus Discord]'s
 `#tooling-questions` channel.
 
-You can also try [tgstation]'s IRC, `#coderbus` on Rizon, but it is usually
-quiet.
-
-[tgstation]: https://github.com/tgstation/tgstation
 [Rust]: https://rust-lang.org
 [cargo]: https://doc.rust-lang.org/cargo/
 [rustup]: https://rustup.rs/
