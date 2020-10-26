@@ -1,18 +1,47 @@
 [package]
 name = "rust-g"
-version = "0.3.0"
+edition = "2018"
+version = "0.4.5"
 authors = ["Bjorn Neergaard <bjorn@neersighted.com>"]
+repository = "https://github.com/tgstation/rust-g"
+license-file = "LICENSE"
+description = "Offloaded task library for the /tg/ Space Station 13 codebase"
 
 [lib]
-crate-type = ["lib", "cdylib"]
+crate-type = ["cdylib"]
 
 [profile.release]
 opt-level = 3
 lto = true
 
 [dependencies]
-chrono = "0.4"
-crypto-hash = "0.3"
 failure = "0.1"
-hex = "0.3"
-percent-encoding = "1.0"
+chrono = { version = "0.4", optional = true }
+crypto-hash = { version = "0.3", optional = true }
+hex = { version = "0.3", optional = true }
+percent-encoding = { version = "1.0", optional = true }
+png = { version = "0.11.0", optional = true }
+git2 = { version = "0.7.1", optional = true, default-features = false }
+noise = { version = "0.6.0", optional = true}
+reqwest = { version = "0.9", optional = true, default-features = false, features = ["rustls-tls"] }
+serde = { version = "1.0", optional = true }
+serde_json = { version = "1.0", optional = true }
+serde_derive = { version = "1.0", optional = true }
+lazy_static = { version = "1.3", optional = true }
+
+[dependencies.mysql]
+version = "18.2"
+optional = true
+git = "https://github.com/blackbeam/rust-mysql-simple"
+rev = "b039fe7a11609aeab9071289bcff496b9366389a"
+
+[features]
+default = ["dmi", "log", "git", "http", "sql", "noise"]
+dmi = ["png"]
+file = []
+hash = ["crypto-hash", "hex"]
+log = ["chrono"]
+url = ["percent-encoding"]
+git = ["git2", "chrono"]
+http = ["reqwest", "serde", "serde_json", "serde_derive", "lazy_static"]
+sql = ["mysql", "serde", "serde_derive", "serde_json", "lazy_static"]
