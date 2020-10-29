@@ -1583,7 +1583,6 @@ dependencies = [
  "failure",
  "git2",
  "hex 0.4.2",
- "lazy_static",
  "mysql",
  "noise",
  "once_cell",
