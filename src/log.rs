@@ -1,5 +1,5 @@
 use crate::error::Result;
-use chrono::Utc;
+use chrono::Local;
 use std::{
     cell::RefCell,
     collections::hash_map::{Entry, HashMap},
@@ -31,7 +31,7 @@ byond_fn! { log_close_all() {
 } }
 
 fn format(data: &str) -> String {
-    format!("[{}] {}\n", Utc::now().format("%FT%T"), data)
+    format!("[{}] {}\n", Local::now().format("%FT%T"), data)
 }
 
 fn write(path: &str, data: String) -> Result<usize> {
