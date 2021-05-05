@@ -34,7 +34,6 @@ fn format(data: &str) -> String {
     format!("[{}] {}\n", Local::now().format("%FT%T"), data)
 }
 
-#[allow(unreachable_code)]
 fn write(path: &str, data: String) -> Result<usize> {
     FILE_MAP.with(|cell| {
         let mut map = cell.borrow_mut();
